@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>t1 Status</title>
+    <link rel="icon" type="image/x-icon" href="icon/favicon.ico">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #0d0d0d, #1f1f1f);
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            color: #fff;
+            overflow: hidden;
+        }
+        .container {
+            text-align: center;
+            animation: fadeIn 2s ease-in-out;
+        }
+        h1 {
+            font-size: 56px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            background: linear-gradient(to right, #ff416c, #ff4b2b);
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+        p {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: #bbb;
+        }
+        a {
+            font-size: 18px;
+            color: #1fddff;
+            text-decoration: none;
+            border: 2px solid #1fddff;
+            padding: 10px 20px;
+            border-radius: 25px;
+            background-color: rgba(31, 221, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        a:hover {
+            background-color: #1fddff;
+            color: #0d0d0d;
+            box-shadow: 0 0 15px rgba(31, 221, 255, 0.6);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+        .particle {
+            position: absolute;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            opacity: 0;
+            animation: float 10s infinite ease-in-out;
+        }
+        @keyframes float {
+            0% {
+                transform: translateY(0);
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-1000px);
+                opacity: 0;
+            }
+        }
+    </style>
+    <script>
+        async function fetchYouTubeLink() {
+            try {
+                // Replace with your GitHub Gist raw URL
+                const response = await fetch('https://gist.githubusercontent.com/t1wtf/b493d637b757196d5acabc42c9619301/raw/d7de08c2b85f3b64263b57bf1f3169a86eeb7798/link.json');
+                const data = await response.json();
+                const link = data.youtubeLink;
+                document.getElementById('youtube-link').href = link;
+                document.getElementById('youtube-link').textContent = link;
+            } catch (error) {
+                console.error('Failed to fetch the YouTube link:', error);
+                document.getElementById('youtube-link').textContent = 'Failed to load the link.';
+            }
+        }
+
+        window.onload = fetchYouTubeLink;
+    </script>
+</head>
+<body>
+    <div class="particles">
+        <div class="particle" style="width: 20px; height: 20px; top: 50%; left: 25%; animation-delay: 0s;"></div>
+        <div class="particle" style="width: 15px; height: 15px; top: 20%; left: 50%; animation-delay: 2s;"></div>
+        <div class="particle" style="width: 10px; height: 10px; top: 70%; left: 80%; animation-delay: 4s;"></div>
+        <div class="particle" style="width: 25px; height: 25px; top: 30%; left: 30%; animation-delay: 6s;"></div>
+        <div class="particle" style="width: 5px; height: 5px; top: 90%; left: 60%; animation-delay: 8s;"></div>
+    </div>
+
+    <div class="container">
+        <h1>t1.wtf is currently under development</h1>
+        <p>Listen to a banger:</p>
+        <a id="youtube-link" href="#" target="_blank"></a>
+    </div>
+</body>
+</html>
