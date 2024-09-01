@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>t1 Status</title>
+    <title>t1.wtf</title>
     <link rel="icon" type="image/x-icon" href="icon/favicon.ico">
     <style>
         body {
@@ -13,113 +13,124 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background: linear-gradient(135deg, #0d0d0d, #1f1f1f);
-            font-family: 'Helvetica Neue', Arial, sans-serif;
-            color: #fff;
-            overflow: hidden;
-        }
-        .container {
+            background: linear-gradient(135deg, #1f1f1f, #121212);
+            color: #f0f0f0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             text-align: center;
-            animation: fadeIn 2s ease-in-out;
+            flex-direction: column;
         }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%; /* Ensure the container takes full viewport height */
+            width: 100%; /* Ensure the container takes full viewport width */
+        }
+
         h1 {
-            font-size: 56px;
-            font-weight: 700;
-            margin-bottom: 20px;
-            background: linear-gradient(to right, #ff416c, #ff4b2b);
-            -webkit-background-clip: text;
-            color: transparent;
-        }
-        p {
-            font-size: 20px;
-            margin-bottom: 20px;
-            color: #bbb;
-        }
-        a {
-            font-size: 18px;
-            color: #1fddff;
-            text-decoration: none;
-            border: 2px solid #1fddff;
-            padding: 10px 20px;
-            border-radius: 25px;
-            background-color: rgba(31, 221, 255, 0.1);
-            transition: all 0.3s ease;
-        }
-        a:hover {
-            background-color: #1fddff;
-            color: #0d0d0d;
-            box-shadow: 0 0 15px rgba(31, 221, 255, 0.6);
+            font-size: 4rem;
+            margin-bottom: 3rem;
+            letter-spacing: 2px;
+            color: #00eaff;
+            margin-left: -8px; /* Slight left adjustment */
+            animation: slideDown 1s ease-out forwards;
         }
 
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
-
-        .particles {
-            position: absolute;
-            top: 0;
-            left: 0;
+        .buttons {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap; /* Allows buttons to wrap on smaller screens */
             width: 100%;
-            height: 100%;
-            pointer-events: none;
+            max-width: 600px; /* Limit width for better alignment */
         }
-        .particle {
+
+        .buttons a {
+            text-decoration: none;
+            color: #f0f0f0;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px 40px;
+            border-radius: 50px;
+            font-size: 1.5rem;
+            transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+            width: 200px;
+            text-align: center;
+        }
+
+        .buttons a::before {
+            content: '';
             position: absolute;
-            background-color: rgba(255, 255, 255, 0.2);
-            border-radius: 50%;
-            opacity: 0;
-            animation: float 10s infinite ease-in-out;
+            top: 50%;
+            left: 50%;
+            width: 300%;
+            height: 300%;
+            background: radial-gradient(circle, #00eaff, transparent);
+            transition: all 0.5s;
+            transform: translate(-50%, -50%) scale(0);
+            z-index: 0;
         }
-        @keyframes float {
+
+        .buttons a:hover::before {
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .buttons a:hover {
+            background: rgba(0, 234, 255, 0.2);
+            transform: translateY(-10px);
+            box-shadow: 0 20px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .buttons a span {
+            position: relative;
+            z-index: 1;
+        }
+
+        @keyframes slideDown {
             0% {
-                transform: translateY(0);
+                transform: translateY(-50px);
                 opacity: 0;
-            }
-            50% {
-                opacity: 1;
             }
             100% {
-                transform: translateY(-1000px);
-                opacity: 0;
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 3rem; /* Adjust heading size for smaller screens */
+            }
+
+            .buttons {
+                flex-direction: column; /* Stack buttons vertically on small screens */
+                gap: 15px; /* Adjust gap between buttons */
+                align-items: center; /* Center buttons in column layout */
+            }
+
+            .buttons a {
+                width: 100%; /* Buttons will take full width of their container */
+                max-width: 300px; /* Limit the max width of buttons on small screens */
             }
         }
     </style>
-    <script>
-        async function fetchYouTubeLink() {
-            try {
-                // Replace with your GitHub Gist raw URL
-                const response = await fetch('https://gist.githubusercontent.com/t1wtf/b493d637b757196d5acabc42c9619301/raw/d7de08c2b85f3b64263b57bf1f3169a86eeb7798/link.json');
-                const data = await response.json();
-                const link = data.youtubeLink;
-                document.getElementById('youtube-link').href = link;
-                document.getElementById('youtube-link').textContent = link;
-            } catch (error) {
-                console.error('Failed to fetch the YouTube link:', error);
-                document.getElementById('youtube-link').textContent = 'Failed to load the link.';
-            }
-        }
-
-        window.onload = fetchYouTubeLink;
-    </script>
 </head>
 <body>
-    <div class="particles">
-        <div class="particle" style="width: 20px; height: 20px; top: 50%; left: 25%; animation-delay: 0s;"></div>
-        <div class="particle" style="width: 15px; height: 15px; top: 20%; left: 50%; animation-delay: 2s;"></div>
-        <div class="particle" style="width: 10px; height: 10px; top: 70%; left: 80%; animation-delay: 4s;"></div>
-        <div class="particle" style="width: 25px; height: 25px; top: 30%; left: 30%; animation-delay: 6s;"></div>
-        <div class="particle" style="width: 5px; height: 5px; top: 90%; left: 60%; animation-delay: 8s;"></div>
-    </div>
-
     <div class="container">
-        <h1>t1.wtf is currently under development</h1>
-        <p>Listen to a banger:</p>
-        <a id="youtube-link" href="#" target="_blank"></a>
+        <h1>t1.wtf</h1>
+        <div class="buttons">
+            <a href="https://dsb.t1.wtf" target="_blank"><span>DSB</span></a>
+            <a href="https://about.t1.wtf" target="_blank"><span>About t1</span></a>
+        </div>
     </div>
 </body>
 </html>
